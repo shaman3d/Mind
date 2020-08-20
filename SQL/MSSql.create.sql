@@ -17,7 +17,7 @@ CREATE TABLE [РезультатДня] (
 
 	 [primaryKey] UNIQUEIDENTIFIER  NOT NULL,
 
-	 [Тип] tТипРезультата  NULL,
+	 [Тип] VARCHAR(13)  NULL,
 
 	 [Описание] VARCHAR(255)  NULL,
 
@@ -35,7 +35,18 @@ CREATE TABLE [МояЖизнь] (
 	 PRIMARY KEY ([primaryKey]))
 
 
-CREATE TABLE [ПрактикуемаяПривычка] (
+CREATE TABLE [Привычка] (
+
+	 [primaryKey] UNIQUEIDENTIFIER  NOT NULL,
+
+	 [Наименование] VARCHAR(255)  NULL,
+
+	 [Приоритет] TINYINT  NULL,
+
+	 PRIMARY KEY ([primaryKey]))
+
+
+CREATE TABLE [ПривычкаДня] (
 
 	 [primaryKey] UNIQUEIDENTIFIER  NOT NULL,
 
@@ -44,17 +55,6 @@ CREATE TABLE [ПрактикуемаяПривычка] (
 	 [Привычка_m0] UNIQUEIDENTIFIER  NOT NULL,
 
 	 [ДеньИзЖизни_m0] UNIQUEIDENTIFIER  NOT NULL,
-
-	 PRIMARY KEY ([primaryKey]))
-
-
-CREATE TABLE [Привычка] (
-
-	 [primaryKey] UNIQUEIDENTIFIER  NOT NULL,
-
-	 [Наименование] VARCHAR(255)  NULL,
-
-	 [Приоритет] TINYINT  NULL,
 
 	 PRIMARY KEY ([primaryKey]))
 
@@ -246,11 +246,11 @@ CREATE INDEX ДеньИзЖизни_IМояЖизнь_m0 on [ДеньИзЖиз�
  ALTER TABLE [РезультатДня] ADD CONSTRAINT [РезультатДня_FДеньИзЖизни_0] FOREIGN KEY ([ДеньИзЖизни_m0]) REFERENCES [ДеньИзЖизни]
 CREATE INDEX РезультатДня_IДеньИзЖизни_m0 on [РезультатДня] ([ДеньИзЖизни_m0])
 
- ALTER TABLE [ПрактикуемаяПривычка] ADD CONSTRAINT [ПрактикуемаяПривычка_FПривычка_0] FOREIGN KEY ([Привычка_m0]) REFERENCES [Привычка]
-CREATE INDEX ПрактикуемаяПривычка_IПривычка_m0 on [ПрактикуемаяПривычка] ([Привычка_m0])
+ ALTER TABLE [ПривычкаДня] ADD CONSTRAINT [ПривычкаДня_FПривычка_0] FOREIGN KEY ([Привычка_m0]) REFERENCES [Привычка]
+CREATE INDEX ПривычкаДня_IПривычка_m0 on [ПривычкаДня] ([Привычка_m0])
 
- ALTER TABLE [ПрактикуемаяПривычка] ADD CONSTRAINT [ПрактикуемаяПривычка_FДеньИзЖизни_0] FOREIGN KEY ([ДеньИзЖизни_m0]) REFERENCES [ДеньИзЖизни]
-CREATE INDEX ПрактикуемаяПривычка_IДеньИзЖизни_m0 on [ПрактикуемаяПривычка] ([ДеньИзЖизни_m0])
+ ALTER TABLE [ПривычкаДня] ADD CONSTRAINT [ПривычкаДня_FДеньИзЖизни_0] FOREIGN KEY ([ДеньИзЖизни_m0]) REFERENCES [ДеньИзЖизни]
+CREATE INDEX ПривычкаДня_IДеньИзЖизни_m0 on [ПривычкаДня] ([ДеньИзЖизни_m0])
 
  ALTER TABLE [STORMWEBSEARCH] ADD CONSTRAINT [STORMWEBSEARCH_FSTORMFILTERSETTING_0] FOREIGN KEY ([FilterSetting_m0]) REFERENCES [STORMFILTERSETTING]
 
